@@ -1,6 +1,6 @@
 import gym
 import os
-#import gym.envs.mujoco
+import gym.envs.mujoco
 
 custom_envs = {
             # Pusher modifications
