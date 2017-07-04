@@ -32,6 +32,15 @@ class PendulumContextualEnv(PendulumEnv):
         self.max_speed  = self.context[0]
         self.max_torque = self.context[1]
 
+        # our own responsibility to define the range of the context, since we define it
+        context_high = np.array([
+            self.max_speed  * 10,
+            self.max_torque * 10])
+        
+        context_low = np.array([ 0.1, 0.1]) # the params in the context can't be less or equal to zero!
+
+        self.context_space = spaces.Box(context_low, context_high)
+
 
     def _step(self, action):
         state, reward, done, _  = super(PendulumContextualEnv, self)._step(action)
@@ -40,5 +49,5 @@ class PendulumContextualEnv(PendulumEnv):
 
     def change_context(self, context_vector):
         self.context    = context_vector
-        self.max_speed  = self.ccontext[0]
+        self.max_speed  = self.context[0]
         self.max_torque = self.context[1]

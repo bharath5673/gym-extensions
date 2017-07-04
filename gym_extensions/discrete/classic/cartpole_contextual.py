@@ -44,6 +44,17 @@ class CartPoleContextualEnv(CartPoleEnv):
         self.masspole  = self.context[1]
         self.length    = self.context[2]
         self.force_mag = self.context[3]
+        
+        # our own responsibility to define the range of the context, since we define it
+        context_high = np.array([
+            self.masscart  * 2,
+            self.masspole  * 10,
+            self.length    * 2,
+            self.force_mag * 2])
+        
+        context_low = np.array([ 0.1, 0.1, 0.1, 0.1]) # the params in the context can't be less or equal to zero!
+
+        self.context_space = spaces.Box(context_low, context_high)
 
 
     def _step(self, action):
