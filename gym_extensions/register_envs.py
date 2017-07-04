@@ -332,11 +332,11 @@ custom_envs = {
 
             # Contextual environments
             "CartPoleContextual-v0":
-                dict(path='gym_extensions.discrete.classic.cartpole:CartPoleContextualEnv',
+                dict(path='gym_extensions.discrete.classic.cartpole_contextual:CartPoleContextualEnv',
                      max_episode_steps=500,
                      kwargs= dict()),
             "PendulumContextual-v0":
-                dict(path='gym_extensions.discrete.classic.cartpole:CartPoleContextualEnv',
+                dict(path='gym_extensions.discrete.classic.pendulum_contextual:PendulumContextualEnv',
                      max_episode_steps=500,
                      kwargs= dict())
                      }

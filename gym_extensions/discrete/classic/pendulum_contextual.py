@@ -19,7 +19,7 @@ def register_custom_cartpole(tag, max_speed = 8, max_torque = 2.0):
     """
     return gym.envs.register(
         id=tag,
-        entry_point="envs.transfer.classic.cartpole:PendulumContextualEnv",
+        entry_point="envs.transfer.classic.pendulum_contextual:PendulumContextualEnv",
         max_episode_steps=200,
         reward_threshold=195.0,
         kwargs= dict(max_speed = max_speed, max_torque = max_torque)
@@ -29,7 +29,7 @@ class PendulumContextualEnv(PendulumEnv):
     def __init__(self,max_speed=8, max_torque=2.0):
         super(PendulumContextualEnv, self).__init__()
         self.context    = [max_speed, max_torque]
-        self.max_speed  = self.ccontext[0]
+        self.max_speed  = self.context[0]
         self.max_torque = self.context[1]
 
 
@@ -39,6 +39,6 @@ class PendulumContextualEnv(PendulumEnv):
 
 
     def change_context(self, context_vector):
-        self.context = context_vector
-        self.max_speed=self.ccontext[0]
-        self.max_torque=self.context[1]
+        self.context    = context_vector
+        self.max_speed  = self.ccontext[0]
+        self.max_torque = self.context[1]

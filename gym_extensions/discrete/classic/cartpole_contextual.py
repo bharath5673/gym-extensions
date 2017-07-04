@@ -24,7 +24,7 @@ def register_custom_cartpole(tag, gravity=9.8, masscart=1.0, masspole=0.1, pole_
     """
     return gym.envs.register(
         id=tag,
-        entry_point="envs.transfer.classic.cartpole:CartPoleContextualEnv",
+        entry_point="envs.transfer.classic.cartpole_contextual:CartPoleContextualEnv",
         max_episode_steps=200,
         reward_threshold=195.0,
         kwargs= dict(gravity = gravity, masscart = masscart, masspole = masspole, length = pole_length, force_mag = force_mag)
@@ -40,10 +40,10 @@ class CartPoleContextualEnv(CartPoleEnv):
         super(CartPoleContextualEnv, self).__init__()
         self.context   = [masscart, masspole, length, force_mag]
         self.gravity   = gravity # not including in the context for now
-        self.masscart  = context[0]
-        self.masspole  = context[1]
-        self.length    = context[2]
-        self.force_mag = context[3]
+        self.masscart  = self.context[0]
+        self.masspole  = self.context[1]
+        self.length    = self.context[2]
+        self.force_mag = self.context[3]
 
 
     def _step(self, action):
