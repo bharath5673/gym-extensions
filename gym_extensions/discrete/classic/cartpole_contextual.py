@@ -70,25 +70,26 @@ class CartPoleContextualEnv(CartPoleEnv):
         #self.force_mag = self.context[3]
 
     def context_space_info(self):
-        cont_info_dict = {}
+        context_info_dict = {}
 
-        cont_info_dict['context_vals'] = {
-                                        'masscart':self.masscart, 
-                                        'masspole':self.masspole, 
-                                        'pole_length':self.length, 
-                                        'force_magnitude':self.force_mag
-                                        }
-
-        cont_info_dict['context_high'] = self.context_high.tolist() # to make sure it can be serialized in json files
-        cont_info_dict['context_low' ] = self.context_low.tolist()
-        cont_info_dict['state_dims'  ] = 4
-        cont_info_dict['action_dims' ] = 1
-        cont_info_dict['state_high'  ] = self.observation_space.high.tolist()
-        cont_info_dict['state_low'   ] = self.observation_space.low.tolist()
+        #context_info_dict['context_vals'] = {
+        #                                'masscart':self.masscart, 
+        #                                'masspole':self.masspole, 
+        #                                'pole_length':self.length, 
+        #                                'force_magnitude':self.force_mag
+        #                                }
+        context_info_dict['context_vals'] = [1.0, 0.1, 0.5, 10.0]
+        context_info_dict['context_high'] = self.context_high.tolist() # to make sure it can be serialized in json files
+        context_info_dict['context_low' ] = self.context_low.tolist()
+        context_info_dict['state_dims'  ] = 4
+        context_info_dict['action_dims' ] = 1
+        context_info_dict['action_space'] = 'discrete'
+        context_info_dict['state_high'  ] = self.observation_space.high.tolist()
+        context_info_dict['state_low'   ] = self.observation_space.low.tolist()
         context_info_dict['action_high' ] = 1
         context_info_dict['action_low'  ] = 0
 
-        return cont_info_dict
+        return context_info_dict
 
 
 
