@@ -11,7 +11,8 @@ def test_cartpole_contextual(env_id):
     else:
     	raise NotImplementedError
 
-    if 7 == len(env.unwrapped.context_space_info().keys()):
+    nr_of_items_context_space_info = 7
+    if nr_of_items_context_space_info == len(env.unwrapped.context_space_info().keys()):
     	pass
     else:
     	print 'context_space_info() function needs to be implemented!'
@@ -39,7 +40,8 @@ def test_pendulum_contextual(env_id):
     else:
     	raise NotImplementedError
 
-    if 7 == len(env.unwrapped.context_space_info().keys()):
+    nr_of_items_context_space_info = 7
+    if nr_of_items_context_space_info == len(env.unwrapped.context_space_info().keys()):
     	pass
     else:
     	print 'context_space_info() function needs to be implemented!'
