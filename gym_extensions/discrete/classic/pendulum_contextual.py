@@ -47,7 +47,7 @@ class PendulumContextualEnv(PendulumEnv):
 
     def change_context(self, context_vector):
         #self.context    = context_vector
-        self.max_speed  = self.context_vector
+        self.max_speed  = context_vector
         #self.max_speed  = self.context[0]
         #self.max_torque = self.context[1]
 
