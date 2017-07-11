@@ -62,11 +62,13 @@ class PendulumContextualEnv(PendulumEnv):
         context_info_dict['context_high'] = self.context_high
         context_info_dict['context_low' ] = self.context_low
         context_info_dict['state_dims'  ] = len(self.state)
-        
+
         # yes, I don't care that there are two/three different actions here; for the contextual setup
         # I need to know what the size of the action vector I need to pass to the transition function
         context_info_dict['action_dims' ] = 1
         context_info_dict['state_high'  ] = self.observation_space.high
         context_info_dict['state_low'   ] = self.observation_space.low
+        context_info_dict['action_high' ] = self.action_space.high
+        context_info_dict['action_low'  ] = self.action_space.low
 
         return context_info_dict
