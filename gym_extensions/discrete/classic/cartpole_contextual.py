@@ -40,7 +40,7 @@ class CartPoleContextualEnv(CartPoleEnv):
         super(CartPoleContextualEnv, self).__init__()
         self.context   = [masscart, masspole, length, force_mag]
         self.gravity   = gravity # not including in the context for now
-        self.masscart  = self.context[0]
+        #self.masscart  = self.context[0]
         self.masspole  = self.context[1]
         self.length    = self.context[2]
         self.force_mag = self.context[3]
@@ -62,11 +62,12 @@ class CartPoleContextualEnv(CartPoleEnv):
 
 
     def change_context(self, context_vector):
-        self.context = context_vector
-        self.masscart  = self.context[0]
-        self.masspole  = self.context[1]
-        self.length    = self.context[2]
-        self.force_mag = self.context[3]
+        #self.context = context_vector
+        self.masscart = context_vector
+        #self.masscart  = self.context[0]
+        #self.masspole  = self.context[1]
+        #self.length    = self.context[2]
+        #self.force_mag = self.context[3]
 
     def context_space_info(self):
         cont_info_dict = {}
