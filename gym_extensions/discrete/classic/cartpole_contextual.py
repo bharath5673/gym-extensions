@@ -85,6 +85,8 @@ class CartPoleContextualEnv(CartPoleEnv):
         cont_info_dict['action_dims' ] = 1
         cont_info_dict['state_high'  ] = self.observation_space.high.tolist()
         cont_info_dict['state_low'   ] = self.observation_space.low.tolist()
+        context_info_dict['action_high' ] = 1
+        context_info_dict['action_low'  ] = 0
 
         return cont_info_dict
 
