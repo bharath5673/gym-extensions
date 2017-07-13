@@ -14,7 +14,7 @@ from gym.utils import seeding
 
 # Inspired by the existing OpenAI Gym LunarLander-v0 environment, as well as by Elon Musk's SpaceX crazy projects !
 __author__ = "Victor Barbaros"
-__credits__ = ["OpenAi Gym", "McGill University", "Oleg Klimov"]
+__credits__ = ["OpenAi Gym", "Oleg Klimov"]
 __version__ = "0.0.1"
 __maintainer__ = "Victor Barbaros"
 __github_username__ = "vBarbaros"
