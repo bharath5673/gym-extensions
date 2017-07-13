@@ -365,6 +365,7 @@ class FalconLander(gym.Env):
         if not self.falcon_rocket.awake and (state[6] == 1 and state[7] == 1):
             done   = True
             reward = +150
+            
         elif not self.falcon_rocket.awake and (state[6] != 1 and state[7] != 1):#if not landed on both legs, penalize
             done   = True
             reward = -150

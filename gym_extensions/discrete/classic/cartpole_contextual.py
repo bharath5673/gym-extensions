@@ -60,7 +60,7 @@ class CartPoleContextualEnv(CartPoleEnv):
         state, reward, done, _  = super(CartPoleContextualEnv, self)._step(action)
         return state, reward, done, {'masscart':self.masscart, 'masspole':self.masspole, 'pole_length':self.length, 'force_magnitude':self.force_mag}
 
-
+      
     def change_context(self, context_vector):
         #self.context = context_vector
         self.masscart = context_vector
@@ -69,15 +69,10 @@ class CartPoleContextualEnv(CartPoleEnv):
         #self.length    = self.context[2]
         #self.force_mag = self.context[3]
 
+        
     def context_space_info(self):
         context_info_dict = {}
 
-        #context_info_dict['context_vals'] = {
-        #                                'masscart':self.masscart, 
-        #                                'masspole':self.masspole, 
-        #                                'pole_length':self.length, 
-        #                                'force_magnitude':self.force_mag
-        #                                }
         context_info_dict['context_vals'] = [1.0, 0.1, 0.5, 10.0]
         context_info_dict['context_high'] = self.context_high.tolist() # to make sure it can be serialized in json files
         context_info_dict['context_low' ] = self.context_low.tolist()
@@ -90,6 +85,7 @@ class CartPoleContextualEnv(CartPoleEnv):
         context_info_dict['action_low'  ] = 0
 
         return context_info_dict
+
 
 
 
