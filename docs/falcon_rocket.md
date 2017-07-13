@@ -8,6 +8,6 @@ The reward function accounts for the falcon rocket landing on both legs (otherwi
 
 You can land the SpaceX Falcon rocket from the keyboard as well.
 
-[![Take a look at it here ](https://github.com/vBarbaros/gym-extensions/raw/master/assets/Falcon.png)](https://www.youtube.com/watch?v=sg-6g9DtfrY&feature=youtu.be "Hope you'll like it!")
+[![Take a look at it here ](https://github.com/vBarbaros/gym-extensions/raw/master/assets/Falcon.png)](https://www.youtube.com/watch?v=GpHylnSox_Q&feature=youtu.be "Hope you'll like it!")
 
 Check the source code <a href="https://github.com/vBarbaros/gym-extensions/tree/master/gym_extensions/continuous/box2d">here</a>
