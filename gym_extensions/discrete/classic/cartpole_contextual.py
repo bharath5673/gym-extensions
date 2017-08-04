@@ -45,6 +45,7 @@ class CartPoleContextualEnv(CartPoleEnv):
         self.length    = self.context[2]
         self.force_mag = self.context[3]
         
+        self.policy_type = ""
         # our own responsibility to define the range of the context, since we define it
         self.context_high = np.array([
             self.masscart  * 2,
@@ -54,9 +55,11 @@ class CartPoleContextualEnv(CartPoleEnv):
 
         # the params in the given context can't be less or equal to zero!
         self.context_low = np.array([ 0.1, 0.1, 0.1, 0.1]) 
-
+        self.bias = 0
+        self.weights = [0,0,0,0]
 
     def _step(self, action):
+        #print action
         state, reward, done, _  = super(CartPoleContextualEnv, self)._step(action)
         return state, reward, done, {'masscart':self.masscart, 'masspole':self.masspole, 'pole_length':self.length, 'force_magnitude':self.force_mag}
 
@@ -64,7 +67,9 @@ class CartPoleContextualEnv(CartPoleEnv):
     def change_context(self, context_vector):
         self.masscart = context_vector
 
-        
+    def set_policy_type(self, policy_type):
+        self.policy_type = policy_type
+
     def context_space_info(self):
         context_info_dict = {}
 

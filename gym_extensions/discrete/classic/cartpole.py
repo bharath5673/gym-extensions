@@ -161,3 +161,22 @@ class CustomizableCartPoleEnv(gym.Env):
         self.poletrans.set_rotation(-x[2])
 
         return self.viewer.render(return_rgb_array = mode=='rgb_array')
+
+if __name__ == "__main__":
+    import time
+    env = gym.make('CartPole-v0')
+    time_steps = 0
+    start_time = time.time()
+    for i_episode in range(500):
+        observation = env.reset()
+        for t in range(500):
+            env.render()
+            print(observation)
+            action = env.action_space.sample()
+            observation, reward, done, info = env.step(action)
+            time_steps += 1
+            if done:
+                print("Episode finished after {} timesteps".format(t+1))
+                break
+    print 'time in seconds elapsed: ', time.time() - start_time, ' time steps: ', time_steps
+    
