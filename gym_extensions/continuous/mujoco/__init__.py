@@ -329,6 +329,14 @@ custom_envs = {
                 dict(path='gym_extensions.continuous.mujoco.modified_humanoid:HumanoidModifiedBodyPartSizeEnv',
                      max_episode_steps=1000,
                      kwargs= dict(body_parts=["left_hand", "right_hand"], size_scale=1.25)),
+
+
+            # Contextual Mujoco environments
+            "HopperContextual-v0" :
+                dict(path='gym_extensions.continuous.mujoco.hopper_contextual:HopperContextualEnv',
+                     max_episode_steps=1000,
+                     reward_threshold=3800.0,
+                     kwargs= dict(size_scale=1.25)),
                      }
 
 def register_custom_envs():
