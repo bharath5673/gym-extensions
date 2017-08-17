@@ -56,7 +56,7 @@ class CartPoleContextualEnv(CartPoleEnv):
         # the params in the given context can't be less or equal to zero!
         self.context_low = np.array([ 0.1, 0.1, 0.1, 0.1]) 
         self.bias = 0
-        self.weights = [0,0,0,0]
+        self.weights = [0]*self.observation_space.shape[0]
 
     def _step(self, action):
         #print action

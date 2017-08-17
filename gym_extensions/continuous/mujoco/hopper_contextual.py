@@ -27,7 +27,7 @@ class HopperContextualEnv(HopperEnv):
         self.context_high = np.array([[i*10 ] for i in self.context])
         self.context_low  = np.array([[i*0.1] for i in self.context]) # the params in the context can't be less or equal to zero!
         self.bias = 0
-        self.weights = [0,0,0]
+        self.weights = [0]*self.observation_space.shape[0]
         
     def _step(self, action):
         state, reward, done, _  = super(HopperContextualEnv, self)._step(action)
@@ -72,6 +72,7 @@ if __name__ == "__main__":
         print 'body_mass ', env.unwrapped.model.body_mass
         time.sleep(2)
         print env.unwrapped.context_space_info()
+        print env.unwrapped.weights
         for t in range(500):
             env.render()
             action = env.action_space.sample()

@@ -38,7 +38,7 @@ class PendulumContextualEnv(PendulumEnv):
 
         self.context_low = np.array([ 0.1, 0.1]) # the params in the context can't be less or equal to zero!
         self.bias = 0
-        self.weights = [0,0,0]
+        self.weights = [0]*self.observation_space.shape[0]
 
     def _step(self, action):
         state, reward, done, _  = super(PendulumContextualEnv, self)._step(action)
