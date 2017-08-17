@@ -48,18 +48,6 @@ class PendulumContextualEnv(PendulumEnv):
     def change_context(self, context_vector):
         self.max_speed  = context_vector
 
-    def send_parameter(self, parameter_vector):
-        # should set the parameter vector for the low-level policy
-        self.bias = parameter_vector[0];
-        self.weights = parameter_vector[1:];
-    
-    def get_parameter(self):
-        return self.bias, self.weights
-    
-    def get_expectation(self, state_vector):
-        value = self.bias + np.dot(state_vector, self.weights)
-        return np.sign(value)/2.0 + 0.5
-
     def set_policy_type(self, policy_type):
         self.policy_type = policy_type
 

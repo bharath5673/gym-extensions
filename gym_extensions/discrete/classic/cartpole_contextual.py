@@ -63,7 +63,6 @@ class CartPoleContextualEnv(CartPoleEnv):
         state, reward, done, _  = super(CartPoleContextualEnv, self)._step(action)
         return state, reward, done, {'masscart':self.masscart, 'masspole':self.masspole, 'pole_length':self.length, 'force_magnitude':self.force_mag}
 
-      
     def change_context(self, context_vector):
         self.masscart = context_vector
 
