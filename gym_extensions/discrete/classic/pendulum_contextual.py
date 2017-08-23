@@ -54,16 +54,16 @@ class PendulumContextualEnv(PendulumEnv):
     def context_space_info(self):
         context_info_dict = {}
 
-        context_info_dict['context_vals'] = [8.0, 2.0]
-        context_info_dict['context_high'] = self.context_high.tolist()
+        context_info_dict['context_dims'] = len(self.context)
+        context_info_dict['context_vals'] = self.context
+        context_info_dict['context_high'] = self.context_high.tolist() # to make sure it can be serialized in json files
         context_info_dict['context_low' ] = self.context_low.tolist()
-        context_info_dict['state_dims'  ] = 3
-        # I need to know what the size of the action vector I need to pass to the transition function
-        context_info_dict['action_dims' ] = 1
+        context_info_dict['state_dims'  ] = self.observation_space.shape[0]
+        context_info_dict['action_dims' ] = self.action_space.shape[0]
         context_info_dict['action_space'] = 'continuous'
         context_info_dict['state_high'  ] = self.observation_space.high.tolist()
         context_info_dict['state_low'   ] = self.observation_space.low.tolist()
-        context_info_dict['action_high' ] = 2
-        context_info_dict['action_low'  ] = 2
+        context_info_dict['action_high' ] = self.action_space.high.tolist()
+        context_info_dict['action_low'  ] = self.action_space.low.tolist()
 
         return context_info_dict

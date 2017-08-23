@@ -51,6 +51,7 @@ class PusherContextualEnv(PusherEnv):
     def context_space_info(self):
         context_info_dict = {}
         context_info_dict['context_vals'] = self.context
+        context_info_dict['context_dims'] = len(self.context)
         context_info_dict['context_high'] = self.context_high.tolist()
         context_info_dict['context_low' ] = self.context_low.tolist()
         context_info_dict['state_dims'  ] = self.observation_space.shape[0]
@@ -79,7 +80,7 @@ if __name__ == "__main__":
         #print 'goal', env.unwrapped.get_body_com("goal")
         print 'qpos', env.unwrapped.model.data.qpos
         time.sleep(2)
-        #print env.unwrapped.context_space_info()
+        print env.unwrapped.context_space_info()['context_dims']
         #print env.unwrapped.weights
         #print env.unwrapped.model.nq
         for t in range(500):

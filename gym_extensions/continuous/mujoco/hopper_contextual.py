@@ -49,6 +49,7 @@ class HopperContextualEnv(HopperEnv):
     def context_space_info(self):
         context_info_dict = {}
         context_info_dict['context_vals'] = self.context
+        context_info_dict['context_dims'] = len(self.context)
         context_info_dict['context_high'] = self.context_high.tolist()
         context_info_dict['context_low' ] = self.context_low.tolist()
         context_info_dict['state_dims'  ] = self.observation_space.shape[0]

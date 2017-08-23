@@ -71,17 +71,18 @@ class CartPoleContextualEnv(CartPoleEnv):
 
     def context_space_info(self):
         context_info_dict = {}
-
-        context_info_dict['context_vals'] = [1.0, 0.1, 0.5, 10.0]
+        
+        context_info_dict['context_dims'] = len(self.context)
+        context_info_dict['context_vals'] = self.context
         context_info_dict['context_high'] = self.context_high.tolist() # to make sure it can be serialized in json files
         context_info_dict['context_low' ] = self.context_low.tolist()
-        context_info_dict['state_dims'  ] = 4
-        context_info_dict['action_dims' ] = 1
+        context_info_dict['state_dims'  ] = self.observation_space.shape[0]
+        context_info_dict['action_dims' ] = self.action_space.shape[0]
         context_info_dict['action_space'] = 'discrete'
         context_info_dict['state_high'  ] = self.observation_space.high.tolist()
         context_info_dict['state_low'   ] = self.observation_space.low.tolist()
-        context_info_dict['action_high' ] = 1
-        context_info_dict['action_low'  ] = 0
+        context_info_dict['action_high' ] = self.action_space.high.tolist()
+        context_info_dict['action_low'  ] = self.action_space.low.tolist()
 
         return context_info_dict
 
