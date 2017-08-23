@@ -37,8 +37,7 @@ class PusherContextualEnv(PusherEnv):
 
     def change_context(self, context_vector):
         # the context is a 4-dim vector [x1, y1, x2, y2]
-        # (x1,y1) - coords of the tip of reacher; (x2,y2) - coords of the target
-
+        # (x1,y1) - coords of the cylinder pos; (x2,y2) - coords of the goal pos
         qpos  = self.init_qpos
         qpos[-4:-2] = context_vector[:2]
         qpos[-2:] = context_vector[2:]
