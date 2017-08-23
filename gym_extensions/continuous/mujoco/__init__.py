@@ -336,9 +336,12 @@ custom_envs = {
                 dict(path='gym_extensions.continuous.mujoco.hopper_contextual:HopperContextualEnv',
                      max_episode_steps=1000,
                      kwargs= dict(size_scale=1.0)),
-
             "ReacherContextual-v0" :
                 dict(path='gym_extensions.continuous.mujoco.reacher_contextual:ReacherContextualEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(size_scale=1.0)),
+            "PusherContextual-v0" :
+                dict(path='gym_extensions.continuous.mujoco.pusher_contextual:PusherContextualEnv',
                      max_episode_steps=1000,
                      kwargs= dict(size_scale=1.0)),
                      }
