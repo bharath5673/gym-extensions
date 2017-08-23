@@ -1,6 +1,3 @@
-PYTHONPATH = '~/Documents/gym-extensions/'
-import sys
-sys.path.append(PYTHONPATH)
 import numpy as np
 from gym import utils
 from gym.envs.mujoco import mujoco_env
@@ -24,8 +21,8 @@ class HopperContextualEnv(HopperEnv):
         HopperEnv.__init__(self)
         self.context   = np.copy(self.model.body_mass)[1:]
         self.policy_type = ""
-        self.context_high = np.array([[i*10 ] for i in self.context])
-        self.context_low  = np.array([[i*0.1] for i in self.context]) # the params in the context can't be less or equal to zero!
+        self.context_high = np.array([i[0]*10  for i in self.context])
+        self.context_low  = np.array([i[0]*0.1 for i in self.context]) # the params in the context can't be less or equal to zero!
         self.bias = 0
         self.weights = [0]*self.observation_space.shape[0]
         
@@ -38,7 +35,8 @@ class HopperContextualEnv(HopperEnv):
            obtained as: env.unwrapped.model.body_names
         """
         temp = np.copy(self.model.body_mass)
-        temp[1:] = [[i]for i in context_vector]
+        #temp[1:] = [[i]for i in context_vector]
+        temp[1] = context_vector
         self.model.body_mass = temp
         self.model._compute_subtree()  # pylint: disable=W0212
         self.model.forward()
@@ -50,14 +48,15 @@ class HopperContextualEnv(HopperEnv):
         context_info_dict = {}
         context_info_dict['context_vals'] = self.context
         context_info_dict['context_dims'] = len(self.context)
+        context_info_dict['context_vals'] = [i[0] for i in self.context]
         context_info_dict['context_high'] = self.context_high.tolist()
         context_info_dict['context_low' ] = self.context_low.tolist()
         context_info_dict['state_dims'  ] = self.observation_space.shape[0]
         # I need to know what the size of the action vector I need to pass to the transition function
         context_info_dict['action_dims' ] = self.action_space.shape[0]
         context_info_dict['action_space'] = 'continuous'
-        context_info_dict['state_high'  ] = self.observation_space.high.tolist()
-        context_info_dict['state_low'   ] = self.observation_space.low.tolist()
+        context_info_dict['state_high'  ] = [1000 for i in self.observation_space.high.tolist()]
+        context_info_dict['state_low'   ] = [-1000 for i in self.observation_space.low.tolist()]
         context_info_dict['action_high' ] = self.action_space.high.tolist()
         context_info_dict['action_low'  ] = self.action_space.low.tolist()
 
@@ -65,6 +64,9 @@ class HopperContextualEnv(HopperEnv):
 
 
 if __name__ == "__main__":
+    #PYTHONPATH = '~/Documents/gym-extensions/'
+    #import sys
+    #sys.path.append(PYTHONPATH)
     import time
     env = gym.make('HopperContextual-v0')
     for i_episode in range(500):
