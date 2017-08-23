@@ -335,8 +335,12 @@ custom_envs = {
             "HopperContextual-v0" :
                 dict(path='gym_extensions.continuous.mujoco.hopper_contextual:HopperContextualEnv',
                      max_episode_steps=1000,
-                     reward_threshold=3800.0,
-                     kwargs= dict(size_scale=1.25)),
+                     kwargs= dict(size_scale=1.0)),
+
+            "ReacherContextual-v0" :
+                dict(path='gym_extensions.continuous.mujoco.reacher_contextual:ReacherContextualEnv',
+                     max_episode_steps=1000,
+                     kwargs= dict(size_scale=1.0)),
                      }
 
 def register_custom_envs():
