@@ -68,23 +68,26 @@ class ReacherContextualEnv(ReacherEnv):
 if __name__ == "__main__":
     import time
     #env = gym.make('Reacher-v1')
-    env = gym.make('ReacherContextual-v0')
+    env = gym.make('HopperContextual-v0')
+    #env = gym.make('PusherContextual-v0')
     for i_episode in range(500):
         env.reset()
         while True:
             goal = np.random.uniform(low=-.25, high=.25, size=4)
             if np.linalg.norm(goal) < 2:
                 break
-        env.unwrapped.change_context(goal)
-        print 'target', env.unwrapped.get_body_com("target")
-        print 'qpos', env.unwrapped.model.data.qpos
+        #env.unwrapped.change_context(goal)
+        #print 'target', env.unwrapped.get_body_com("target")
+        #print 'qpos', env.unwrapped.model.data.qpos
         time.sleep(2)
+        #print env.unwrapped.context_space_info()['action_dims']
         #print env.unwrapped.context_space_info()
         #print env.unwrapped.weights
-        print env.unwrapped.model.nq
+        #print env.unwrapped.model.nq
         for t in range(500):
             env.render()
             action = env.action_space.sample()
+            print 'action ', action
             observation, reward, done, info = env.step(action)
             #print observation
             if done:
