@@ -35,8 +35,8 @@ class HopperContextualEnv(HopperEnv):
            obtained as: env.unwrapped.model.body_names
         """
         temp = np.copy(self.model.body_mass)
-        #temp[1:] = [[i]for i in context_vector]
-        temp[1] = context_vector
+        temp[1:] = [[i]for i in context_vector]
+        #temp[1] = context_vector
         self.model.body_mass = temp
         self.model._compute_subtree()  # pylint: disable=W0212
         self.model.forward()
@@ -64,9 +64,6 @@ class HopperContextualEnv(HopperEnv):
 
 
 if __name__ == "__main__":
-    #PYTHONPATH = '~/Documents/gym-extensions/'
-    #import sys
-    #sys.path.append(PYTHONPATH)
     import time
     env = gym.make('HopperContextual-v0')
     for i_episode in range(500):

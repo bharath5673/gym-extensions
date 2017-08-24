@@ -38,23 +38,26 @@ class CartPoleContextualEnv(CartPoleEnv):
 
     def __init__(self,gravity=9.8, masscart=1.0, masspole=0.1, length = .5, force_mag = 10.0):
         super(CartPoleContextualEnv, self).__init__()
-        self.context   = [masscart, masspole, length, force_mag]
+        #self.context   = [masscart, masspole, length, force_mag]
+        self.context   = [masscart]
         self.gravity   = gravity # not including in the context for now
-        #self.masscart  = self.context[0]
-        self.masspole  = self.context[1]
-        self.length    = self.context[2]
-        self.force_mag = self.context[3]
+        self.masscart  = self.context[0]
+        #self.masspole  = self.context[1]
+        #self.length    = self.context[2]
+        #self.force_mag = self.context[3]
         
         self.policy_type = ""
         # our own responsibility to define the range of the context, since we define it
-        self.context_high = np.array([
-            self.masscart  * 2,
-            self.masspole  * 10,
-            self.length    * 2,
-            self.force_mag * 2])
-
+        self.context_high = np.array([self.masscart  * 2])
+        
+        #self.context_high = np.array([
+        #    self.masscart  * 2,
+        #    self.masspole  * 10,
+        #    self.length    * 2,
+        #    self.force_mag * 2])
         # the params in the given context can't be less or equal to zero!
-        self.context_low = np.array([ 0.1, 0.1, 0.1, 0.1]) 
+        #self.context_low = np.array([ 0.1, 0.1, 0.1, 0.1])
+        self.context_low = np.array([ 0.1])  
         self.bias = 0
         self.weights = [0]*self.observation_space.shape[0]
 
@@ -77,12 +80,12 @@ class CartPoleContextualEnv(CartPoleEnv):
         context_info_dict['context_high'] = self.context_high.tolist() # to make sure it can be serialized in json files
         context_info_dict['context_low' ] = self.context_low.tolist()
         context_info_dict['state_dims'  ] = self.observation_space.shape[0]
-        context_info_dict['action_dims' ] = self.action_space.shape[0]
+        context_info_dict['action_dims' ] = 1
         context_info_dict['action_space'] = 'discrete'
         context_info_dict['state_high'  ] = self.observation_space.high.tolist()
         context_info_dict['state_low'   ] = self.observation_space.low.tolist()
-        context_info_dict['action_high' ] = self.action_space.high.tolist()
-        context_info_dict['action_low'  ] = self.action_space.low.tolist()
+        context_info_dict['action_high' ] = 1
+        context_info_dict['action_low'  ] = 0
 
         return context_info_dict
 

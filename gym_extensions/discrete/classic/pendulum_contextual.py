@@ -27,26 +27,32 @@ def register_custom_cartpole(tag, max_speed = 8, max_torque = 2.0):
 class PendulumContextualEnv(PendulumEnv):
     def __init__(self,max_speed=8, max_torque=2.0):
         super(PendulumContextualEnv, self).__init__()
-        self.context    = [max_speed, max_torque]
+        #self.context    = [max_speed, max_torque]
+        self.context    = [max_speed]
         self.max_speed  = self.context[0]
-        self.max_torque = self.context[1]
+        #self.max_torque = self.context[1]
+        self.max_torque = max_torque
         self.policy_type = ""
         # our own responsibility to define the range of the context, since we define it
+        #self.context_high = np.array([
+        #    self.max_speed  * 10,
+        #    self.max_torque * 10])
         self.context_high = np.array([
-            self.max_speed  * 10,
-            self.max_torque * 10])
-
+            self.max_speed  * 10])
         self.context_low = np.array([ 0.1, 0.1]) # the params in the context can't be less or equal to zero!
+        self.context_low = np.array([ 0.1])        
         self.bias = 0
         self.weights = [0]*self.observation_space.shape[0]
 
     def _step(self, action):
+        #print 'action', action
         state, reward, done, _  = super(PendulumContextualEnv, self)._step(action)
         return state, reward, done, {'max_speed':self.max_speed, 'max_torque':self.max_torque}
 
 
     def change_context(self, context_vector):
         self.max_speed  = context_vector
+        #self.max_torque = context_vector[1]
 
     def set_policy_type(self, policy_type):
         self.policy_type = policy_type

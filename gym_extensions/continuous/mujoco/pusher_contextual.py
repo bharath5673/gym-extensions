@@ -1,6 +1,6 @@
-PYTHONPATH = '~/Documents/gym-extensions/'
-import sys
-sys.path.append(PYTHONPATH)
+#PYTHONPATH = '~/Documents/gym-extensions/'
+#import sys
+#sys.path.append(PYTHONPATH)
 import numpy as np
 from gym import utils
 from gym.envs.mujoco import mujoco_env
@@ -50,7 +50,7 @@ class PusherContextualEnv(PusherEnv):
 
     def context_space_info(self):
         context_info_dict = {}
-        context_info_dict['context_vals'] = self.context
+        context_info_dict['context_vals'] = self.context.tolist()
         context_info_dict['context_dims'] = len(self.context)
         context_info_dict['context_high'] = self.context_high.tolist()
         context_info_dict['context_low' ] = self.context_low.tolist()
@@ -58,8 +58,8 @@ class PusherContextualEnv(PusherEnv):
         # I need to know what the size of the action vector I need to pass to the transition function
         context_info_dict['action_dims' ] = self.action_space.shape[0]
         context_info_dict['action_space'] = 'continuous'
-        context_info_dict['state_high'  ] = self.observation_space.high.tolist()
-        context_info_dict['state_low'   ] = self.observation_space.low.tolist()
+        context_info_dict['state_high'  ] = [1000 for i in self.observation_space.high.tolist()]
+        context_info_dict['state_low'   ] = [-1000 for i in self.observation_space.low.tolist()]
         context_info_dict['action_high' ] = self.action_space.high.tolist()
         context_info_dict['action_low'  ] = self.action_space.low.tolist()
 
