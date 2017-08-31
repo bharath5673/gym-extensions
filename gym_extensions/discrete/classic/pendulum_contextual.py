@@ -8,7 +8,7 @@ import numpy as np
 #from os import path
 logger = logging.getLogger(__name__)
 
-def register_custom_cartpole(tag, max_speed = 8, max_torque = 2.0):
+def register_custom_pendulum(tag, max_speed = 8, max_torque = 2.0):
     """
     Tag - What to call your env (e.g. CustomCartpoleLongPole-v0, CustomCartpoleLongPole-v1)
     gravity - if you want to modify the gravity factor (default 9.8)
@@ -25,8 +25,16 @@ def register_custom_cartpole(tag, max_speed = 8, max_torque = 2.0):
     )
 
 class PendulumContextualEnv(PendulumEnv):
+    metadata = {
+        'render.modes' : ['human', 'rgb_array'],
+        'video.frames_per_second' : 30
+    }
     def __init__(self,max_speed=8, max_torque=2.0):
         super(PendulumContextualEnv, self).__init__()
+        high = np.array([np.pi, 1])
+        self.state = self.np_random.uniform(low=-high, high=high)
+        self.last_u = None
+
         #self.context    = [max_speed, max_torque]
         self.context    = [max_speed]
         self.max_speed  = self.context[0]
@@ -73,3 +81,7 @@ class PendulumContextualEnv(PendulumEnv):
         context_info_dict['action_low'  ] = self.action_space.low.tolist()
 
         return context_info_dict
+
+    def _render(self, mode='human', close=False):
+        return super(PendulumContextualEnv, self)._render()
+        

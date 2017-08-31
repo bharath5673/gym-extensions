@@ -38,17 +38,20 @@ class CartPoleContextualEnv(CartPoleEnv):
 
     def __init__(self,gravity=9.8, masscart=1.0, masspole=0.1, length = .5, force_mag = 10.0):
         super(CartPoleContextualEnv, self).__init__()
+        self.state = None
         #self.context   = [masscart, masspole, length, force_mag]
-        self.context   = [masscart]
+        #self.context   = [masscart]
+        self.context   = [masscart, length]
         self.gravity   = gravity # not including in the context for now
         self.masscart  = self.context[0]
+        self.length    = self.context[1]
         #self.masspole  = self.context[1]
         #self.length    = self.context[2]
         #self.force_mag = self.context[3]
         
         self.policy_type = ""
         # our own responsibility to define the range of the context, since we define it
-        self.context_high = np.array([self.masscart  * 2])
+        self.context_high = np.array([self.masscart  * 2, self.length * 2])
         
         #self.context_high = np.array([
         #    self.masscart  * 2,
@@ -57,7 +60,7 @@ class CartPoleContextualEnv(CartPoleEnv):
         #    self.force_mag * 2])
         # the params in the given context can't be less or equal to zero!
         #self.context_low = np.array([ 0.1, 0.1, 0.1, 0.1])
-        self.context_low = np.array([ 0.1])  
+        self.context_low = np.array([ 0.1, 0.1])  
         self.bias = 0
         self.weights = [0]*self.observation_space.shape[0]
 
@@ -67,7 +70,9 @@ class CartPoleContextualEnv(CartPoleEnv):
         return state, reward, done, {'masscart':self.masscart, 'masspole':self.masspole, 'pole_length':self.length, 'force_magnitude':self.force_mag}
 
     def change_context(self, context_vector):
-        self.masscart = context_vector
+        #self.masscart = context_vector
+        self.masscart = context_vector[0]
+        self.length = context_vector[1]
 
     def set_policy_type(self, policy_type):
         self.policy_type = policy_type
